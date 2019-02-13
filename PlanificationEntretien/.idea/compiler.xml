@@ -9,5 +9,8 @@
         <module name="PlanificationEntretien" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PlanificationEntretien" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

@@ -45,7 +45,6 @@
     <!-- =============================================================== -->
     <modules>
         <module>PlanificationEntretien</module>
-        <module>RecrutementCandidat</module>
     </modules>
 
     <!-- =============================================================== -->
