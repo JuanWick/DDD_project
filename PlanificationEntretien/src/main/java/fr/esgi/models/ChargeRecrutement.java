@@ -1,7 +1,8 @@
 package fr.esgi.models;
 
-@Data
+import lombok.Data;
 
+@Data
 public class ChargeRecrutement {
 
     private int Id;

@@ -1,5 +1,7 @@
 package fr.esgi.models;
 
+import lombok.Data;
+
 import java.util.List;
 
 @Data

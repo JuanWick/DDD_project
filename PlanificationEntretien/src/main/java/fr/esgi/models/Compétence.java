@@ -1,6 +1,6 @@
-package fr.esgi;
+package fr.esgi.models;
 
-@Data
+import lombok.Data;
 
 public enum Compétence {
     JAVA("java"),

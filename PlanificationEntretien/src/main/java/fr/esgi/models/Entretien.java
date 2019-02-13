@@ -9,7 +9,6 @@ import java.util.Date;
 @Builder
 public class Entretien {
 
-    public Date date;
-    public long heureDebut;
+    public CreneauHoraire creneauHoraire;
     public int duree;
 }
