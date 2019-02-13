@@ -1,4 +1,4 @@
-package fr.esgi.interfaces.impl;
+package fr.esgi.interfaces.business;
 
 import fr.esgi.models.Candidat;
 import fr.esgi.models.CreneauHoraire;
