@@ -1,11 +1,8 @@
 package fr.esgi.interfaces.impl;
 
-import fr.esgi.Candidat;
-import fr.esgi.CreneauHoraire;
-import fr.esgi.Entretien;
+import fr.esgi.models.Candidat;
+import fr.esgi.models.CreneauHoraire;
 import fr.esgi.interfaces.PlanificationEntretiens;
-
-import java.util.Date;
 
 public class PlanificationEntretiensMock implements PlanificationEntretiens {
 

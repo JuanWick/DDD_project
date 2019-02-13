@@ -1,4 +1,4 @@
-package fr.esgi;
+package fr.esgi.models;
 
 public class Candidat {
 }

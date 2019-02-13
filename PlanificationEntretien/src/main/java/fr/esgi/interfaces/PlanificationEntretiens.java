@@ -1,8 +1,7 @@
 package fr.esgi.interfaces;
 
-import fr.esgi.Candidat;
-import fr.esgi.CreneauHoraire;
-import fr.esgi.Entretien;
+import fr.esgi.models.Candidat;
+import fr.esgi.models.CreneauHoraire;
 
 public interface PlanificationEntretiens {
    public boolean planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite);
