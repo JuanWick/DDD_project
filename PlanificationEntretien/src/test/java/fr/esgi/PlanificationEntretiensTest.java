@@ -1,11 +1,10 @@
 package fr.esgi;
 
 import fr.esgi.exceptions.*;
-import fr.esgi.interfaces.PlanificationEntretiens;
-import fr.esgi.interfaces.business.PlanificationEntretienBusiness;
+import fr.esgi.useCases.PlanificationEntretiens;
+import fr.esgi.useCases.impl.PlanificationEntretienBusiness;
 import fr.esgi.models.Candidat;
 import fr.esgi.models.Compétence;
-import fr.esgi.models.ConsultantRecruteur;
 import fr.esgi.models.CreneauHoraire;
 import junit.framework.TestCase;
 import org.junit.Assert;

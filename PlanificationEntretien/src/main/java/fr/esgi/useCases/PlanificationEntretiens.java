@@ -1,4 +1,4 @@
-package fr.esgi.interfaces;
+package fr.esgi.useCases;
 
 import fr.esgi.models.Candidat;
 import fr.esgi.models.CreneauHoraire;

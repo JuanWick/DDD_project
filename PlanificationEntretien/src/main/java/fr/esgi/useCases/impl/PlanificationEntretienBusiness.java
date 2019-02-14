@@ -1,8 +1,8 @@
-package fr.esgi.interfaces.business;
+package fr.esgi.useCases.impl;
 
-import fr.esgi.interfaces.PlanificationEntretiens;
 import fr.esgi.models.Candidat;
 import fr.esgi.models.CreneauHoraire;
+import fr.esgi.useCases.PlanificationEntretiens;
 
 public class PlanificationEntretienBusiness implements PlanificationEntretiens {
     @Override
