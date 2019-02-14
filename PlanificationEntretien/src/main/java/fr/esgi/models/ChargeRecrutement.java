@@ -9,10 +9,7 @@ public class ChargeRecrutement implements ValueObject {
     private String nom;
 
     public ChargeRecrutement(String nom) {
-        if(null == nom || nom.isEmpty()){
-            throw new UnValidatedConstructorValueException();
-        }
-        this.nom = nom;
+        this.nom = nom.toLowerCase();
     }
 
     @Override
@@ -37,6 +34,6 @@ public class ChargeRecrutement implements ValueObject {
             throw new UnValidatedConstructorValueException();
         }
 
-        return false;
+        return false;//TODO
     }
 }
