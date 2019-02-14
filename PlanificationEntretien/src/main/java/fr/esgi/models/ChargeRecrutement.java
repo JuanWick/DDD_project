@@ -1,11 +1,42 @@
 package fr.esgi.models;
 
-import lombok.Data;
+import fr.esgi.exceptions.UnValidatedConstructorValueException;
+import lombok.Getter;
 
-@Data
-public class ChargeRecrutement {
+@Getter
+public class ChargeRecrutement implements ValueObject {
 
-    private int Id;
-    private String Nom;
-    private Boolean IsRhSuivi;
+    private String nom;
+
+    public ChargeRecrutement(String nom) {
+        if(null == nom || nom.isEmpty()){
+            throw new UnValidatedConstructorValueException();
+        }
+        this.nom = nom;
+    }
+
+    @Override
+    public boolean hashCode(Object o) {
+        ChargeRecrutement chargeRecrutement;
+        try {
+            chargeRecrutement = (ChargeRecrutement) o;
+        } catch (Exception e) {
+            throw new UnValidatedConstructorValueException();
+        }
+
+
+        return chargeRecrutement.getNom().equals(nom);
+    }
+
+    @Override
+    public boolean order(Object o) {
+        ChargeRecrutement chargeRecrutement;
+        try {
+            chargeRecrutement = (ChargeRecrutement) o;
+        } catch (Exception e) {
+            throw new UnValidatedConstructorValueException();
+        }
+
+        return false;
+    }
 }
