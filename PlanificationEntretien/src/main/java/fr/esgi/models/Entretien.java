@@ -9,6 +9,17 @@ import java.util.Date;
 @Builder
 public class Entretien {
 
-    public CreneauHoraire creneauHoraire;
-    public int duree;
+    private Candidat candidat;
+    private ConsultantRecruteur consultantRecruteur;
+    private CreneauHoraire creneauHoraire;
+    private String statut;
+    private int duree;
+
+    public void confirmer(){
+
+    }
+
+    public void annuler(){
+
+    }
 }
