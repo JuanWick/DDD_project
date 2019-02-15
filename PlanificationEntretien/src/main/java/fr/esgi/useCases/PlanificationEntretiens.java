@@ -4,5 +4,11 @@ import fr.esgi.models.Candidat;
 import fr.esgi.models.CreneauHoraire;
 
 public interface PlanificationEntretiens {
-   public boolean planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite);
+   void planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite);
+
+   void annulerEntretien(Candidat candidat);
+
+   void rePlanifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite);
+
+   void notifierRh();
 }
