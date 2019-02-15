@@ -6,7 +6,8 @@ public enum Compétence {
     JAVA("java"),
     DOTNET("dotnet"),
     JS("javascript"),
-    AGILITE("agilité");
+    AGILITE("agilité"),
+    PYTHON("python");
 
     private String url;
 
