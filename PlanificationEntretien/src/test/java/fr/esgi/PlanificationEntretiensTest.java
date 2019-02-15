@@ -13,9 +13,9 @@ import java.util.*;
 
 public class PlanificationEntretiensTest extends TestCase {
     ApiClient apiClient = Mockito.mock(ApiclientImpl.class);
-    PersistanceService persistanceService = Mockito.mock(PersistanceServiceTestImpl.class);
+    PersistanceService persistanceService = new PersistanceServiceTestImpl();
 
-    PlanificationEntretiens planificationEntretiens = Mockito.spy(new PlanificationEntretienBusiness(apiClient,persistanceService));
+    PlanificationEntretiens planificationEntretiens = new PlanificationEntretienBusiness(apiClient,persistanceService);
 
     public void test_should_planifier_entretien()
     {
@@ -32,9 +32,6 @@ public class PlanificationEntretiensTest extends TestCase {
         MoisCreneau moisCreneauRecherche = MoisCreneau.builder()
                 .mois(3)
                 .annee(2019).build();
-        Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(moisCreneauRecherche)).thenReturn(consultantRecruteurs);
-
-        //On mock le retour de la persitance
         Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(moisCreneauRecherche)).thenReturn(consultantRecruteurs);
 
         //Creation du candidat
