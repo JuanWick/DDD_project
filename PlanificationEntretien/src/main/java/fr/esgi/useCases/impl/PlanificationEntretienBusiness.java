@@ -8,6 +8,8 @@ import fr.esgi.models.*;
 import fr.esgi.useCases.PlanificationEntretiens;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class PlanificationEntretienBusiness implements PlanificationEntretiens {
@@ -51,18 +53,16 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
         }
 
         if(consultantRecruteursDisponible.size() > 0 ){
-            persistanceService.addEntretien(Entretien.builder()
-                    .candidat(candidat)
-                    .consultantRecruteur(consultantRecruteursDisponible.get(0))
-                    .creneauHoraire(creneauSouhaite)
-                    .duree(DUREE_ENTRETIEN)
-                    .build());
+            persistanceService.addEntretien(new Entretien(candidat, consultantRecruteursDisponible.get(0),creneauSouhaite,DUREE_ENTRETIEN));
         }
 
     }
 
     @Override
     public void annulerEntretien(Candidat candidat) {
+        //Récupérer entretien par candidat
+
+        //changer le statut
 
     }
 
@@ -76,15 +76,18 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
 
     }
 
-    private MoisCreneau creneauHoraireToMoisCreneauAdapter(CreneauHoraire creneauHoraire){//TODO
-        return null;
+    private MoisCreneau creneauHoraireToMoisCreneauAdapter(CreneauHoraire creneauHoraire){
+        Calendar calendar = creneauHoraire.getDate();
+        return MoisCreneau.builder()
+                .annee(calendar.get(Calendar.YEAR))
+                .mois(calendar.get(Calendar.MONTH)).build();
     }
 
-    private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){
+    private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){//TODO
         return false;
     }
 
-    private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){
+    private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){//TODO
         return false;
     }
 }

@@ -1,13 +1,13 @@
 package fr.esgi.models;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.util.Date;
+import java.util.Calendar;
 
-@Data
+@Getter
 @Builder
 public class CreneauHoraire {
-    Date date;
-    public long heureDebut;
+    Calendar date;
+    private long heureDebut;
 }
