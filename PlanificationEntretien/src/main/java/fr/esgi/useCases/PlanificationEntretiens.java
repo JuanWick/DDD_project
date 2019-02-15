@@ -10,5 +10,4 @@ public interface PlanificationEntretiens {
 
    void rePlanifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite);
 
-   void notifierRh();
 }

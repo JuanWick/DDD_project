@@ -86,10 +86,6 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
 
     }
 
-    @Override
-    public void notifierRh() {
-
-    }
 
     private MoisCreneau creneauHoraireToMoisCreneauAdapter(CreneauHoraire creneauHoraire){
         Calendar calendar = creneauHoraire.getDate();
