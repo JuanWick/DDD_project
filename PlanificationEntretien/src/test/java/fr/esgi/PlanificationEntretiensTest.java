@@ -13,7 +13,7 @@ import java.util.*;
 
 public class PlanificationEntretiensTest extends TestCase {
     ApiClient apiClient = Mockito.mock(ApiclientImpl.class);
-    PersistanceService persistanceService = new PersistanceServiceTestImpl();
+    PersistanceService persistanceService = Mockito.mock(PersistanceServiceTestImpl.class);
 
     PlanificationEntretiens planificationEntretiens = Mockito.spy(new PlanificationEntretienBusiness(apiClient,persistanceService));
 

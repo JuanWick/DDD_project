@@ -17,6 +17,11 @@ public class PersistanceServiceTestImpl implements PersistanceService {
 
     @Override
     public Entretien getEntretien(Candidat candidat) {
+        for (Entretien entretien: entretiens){
+            if(entretien.getCandidat().hashCode(candidat)){
+                return entretien;
+            }
+        }
         return null;
     }
 }
