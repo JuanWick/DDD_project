@@ -1,14 +1,11 @@
 package fr.esgi.useCases.impl;
 
-import fr.esgi.exceptions.BusyConsultantRecruteurException;
-import fr.esgi.exceptions.ErrorApiException;
-import fr.esgi.exceptions.IncompleteInputParameterException;
-import fr.esgi.exceptions.UnMatchingCompetenceConsultantRecruteurException;
+import fr.esgi.exceptions.*;
+import fr.esgi.infraStructure.insideApi.DateService;
 import fr.esgi.infraStructure.outsideApi.ApiClient;
 import fr.esgi.infraStructure.outsideApi.PersistanceService;
 import fr.esgi.models.*;
 import fr.esgi.useCases.PlanificationEntretiens;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,17 +16,25 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
 
     private ApiClient apiClient;
     private PersistanceService persistanceService;
+    private DateService dateService;
 
     private int DUREE_ENTRETIEN = 30;
 
-    public PlanificationEntretienBusiness(ApiClient apiClient, PersistanceService persistanceService) {
+    public PlanificationEntretienBusiness(ApiClient apiClient, PersistanceService persistanceService,  DateService dateService) {
         this.apiClient = apiClient;
         this.persistanceService = persistanceService;
+        this.dateService = dateService;
     }
 
     @Override
     public void planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite) {
         if(null == candidat || null == creneauSouhaite) {
+            throw new IncompleteInputParameterException();
+        }
+        if(null == candidat.getCompetences() || candidat.getCompetences().size() == 0){
+            throw new NoSkillsSelectedException();
+        }
+        if(null == creneauSouhaite || null == creneauSouhaite.getDate() || creneauSouhaite.getDate().getTime().before(dateService.today())){
             throw new IncompleteInputParameterException();
         }
         List<ConsultantRecruteur> consultantRecruteurs;
@@ -46,6 +51,9 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
                 consultantRecruteursCompetent.add(consultantRecruteur);
             }
         }
+        if(consultantRecruteursCompetent.size() == 0){
+            throw new UnMatchingCompetenceConsultantRecruteurException();
+        }
 
         List<ConsultantRecruteur> consultantRecruteursDisponible = new ArrayList<>();
 
@@ -53,6 +61,10 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
             if(estDisponible(consultantRecruteur, creneauSouhaite)){
                 consultantRecruteursDisponible.add(consultantRecruteur);
             }
+        }
+
+        if(consultantRecruteursDisponible.size() == 0){
+            throw new BusyConsultantRecruteurException();
         }
 
         if(consultantRecruteursDisponible.size() > 0 ){
@@ -94,13 +106,13 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
                 }
             }
         }
-        throw new UnMatchingCompetenceConsultantRecruteurException();
+        return false;
     }
 
     private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){
     for(Entretien EntretienConsultantExpected : persistanceService.getEntretiens(consultantRecruteur)){
         if(EntretienConsultantExpected.getCreneauHoraire().getHeureDebut() == creneauSouhaité.getHeureDebut()){
-            throw new BusyConsultantRecruteurException();
+            return false;
         }
     }
    for(int DisponibilityConsultant : consultantRecruteur.getHoursFree()){
@@ -108,6 +120,6 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
            return true;
        }
    }
-    throw new BusyConsultantRecruteurException();
+   return false;
     }
 }
