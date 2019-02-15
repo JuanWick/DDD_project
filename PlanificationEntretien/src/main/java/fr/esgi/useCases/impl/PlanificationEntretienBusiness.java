@@ -8,6 +8,7 @@ import fr.esgi.models.CreneauHoraire;
 import fr.esgi.models.MoisCreneau;
 import fr.esgi.useCases.PlanificationEntretiens;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlanificationEntretienBusiness implements PlanificationEntretiens {
@@ -23,11 +24,19 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
         if(null == candidat || null == creneauSouhaite) {
             throw new IncompleteInputParameterException();
         }
+        try {
+            List<ConsultantRecruteur> consultantRecruteurs = apiClient.chercherConsultantRecruteurDisponibleParMois(creneauHoraireToMoisCreneauAdapter(creneauSouhaite));
+        } catch(Exception e){
+            throw
+        }
 
-        List<ConsultantRecruteur> consultantRecruteurs = apiClient.chercherConsultantRecruteurDisponibleParMois(creneauHoraireToMoisCreneauAdapter(creneauSouhaite));
+        List<ConsultantRecruteur> consultantRecruteursCompetent = new ArrayList<>();
 
-        //TODO filter compétence consultant testeur
-
+        for (ConsultantRecruteur consultantRecruteur : consultantRecruteurs) {
+            if(peutTester(consultantRecruteur, candidat)){
+                consultantRecruteursCompetent.add(consultantRecruteur);
+            }
+        }
         //TODO find first
 
         //TODO creation entretien
@@ -54,7 +63,7 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
         return null;
     }
 
-    private ConsultantRecruteur peutTester(Candidat candidat){
-        return null;
+    private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){
+        return false;
     }
 }
