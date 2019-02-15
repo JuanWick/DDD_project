@@ -84,11 +84,28 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
                 .mois(calendar.get(Calendar.MONTH)).build();
     }
 
-    private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){//TODO
-        return true;
+    private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){
+        for (Compétence competenceRecruteur : consultantRecruteur.getCompétences()){
+            for (Compétence competenceCandidat : candidat.getCompetences()){
+                if (competenceRecruteur == competenceCandidat) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){//TODO
-        return true;
+    private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){
+    for(Entretien EntretienConsultantExpected : persistanceService.getEntretiens(consultantRecruteur)){
+        if(EntretienConsultantExpected.getCreneauHoraire().getHeureDebut() == creneauSouhaité.getHeureDebut()){
+            return false;
+        }
+    }
+       for(int DisponibilityConsultant : consultantRecruteur.getHoursFree()){
+           if(DisponibilityConsultant == creneauSouhaité.getHeureDebut()){
+               return true;
+           }
+       }
+       return false;
     }
 }

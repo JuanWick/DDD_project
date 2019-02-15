@@ -9,5 +9,5 @@ import java.util.Calendar;
 @Builder
 public class CreneauHoraire {
     Calendar date;
-    private long heureDebut;
+    private int heureDebut;
 }
