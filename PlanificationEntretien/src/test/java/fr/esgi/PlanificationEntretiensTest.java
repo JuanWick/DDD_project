@@ -33,26 +33,26 @@ public class PlanificationEntretiensTest {
         //Consultant recruteur 1
         List<Compétence> compétences = new ArrayList<>();
         compétences.add(Compétence.AGILITE);
-        ConsultantRecruteur consultantRecruteur1 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant1").Id(0).build();
+        ConsultantRecruteur consultantRecruteur1 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant1").hoursFree(new int[]{18,19}).build();
         consultantRecruteurs.add(consultantRecruteur1);
 
         //Consultant recruteur 2
         compétences = new ArrayList<>();
         compétences.add(Compétence.DOTNET);
-        ConsultantRecruteur consultantRecruteur2 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant2").Id(2).build();
+        ConsultantRecruteur consultantRecruteur2 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant2").hoursFree(new int[]{18,19}).build();
         consultantRecruteurs.add(consultantRecruteur2);
 
         //Consultant recruteur 3
         compétences = new ArrayList<>();
         compétences.add(Compétence.JS);
-        ConsultantRecruteur consultantRecruteur3 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant3").Id(3).build();
+        ConsultantRecruteur consultantRecruteur3 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant3").hoursFree(new int[]{18,19}).build();
         consultantRecruteurs.add(consultantRecruteur3);
 
         //Consultant recruteur 4
         compétences = new ArrayList<>();
         compétences.add(Compétence.JAVA);
         compétences.add(Compétence.JS);
-        ConsultantRecruteur consultantRecruteur4 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant4").Id(4).build();
+        ConsultantRecruteur consultantRecruteur4 = ConsultantRecruteur.builder().Compétences(compétences).Nom("Consultant4").hoursFree(new int[]{18,19}).build();
         consultantRecruteurs.add(consultantRecruteur4);
 
         MoisCreneau moisCreneauRecherche = MoisCreneau.builder()
@@ -68,11 +68,11 @@ public class PlanificationEntretiensTest {
         compétencesCandidat.add(Compétence.AGILITE);
 
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
-        CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(10).build();
+        CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(18).build();
 
         //On execute la logique métier
         planificationEntretiens.planifierEntretien(candidat,creneauHoraire);
@@ -92,11 +92,11 @@ public class PlanificationEntretiensTest {
         compétencesCandidat.add(Compétence.PYTHON);
 
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
-        CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(10).build();
+        CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(18).build();
 
         //On execute la logique métier
         planificationEntretiens.planifierEntretien(candidat,creneauHoraire);
@@ -109,14 +109,14 @@ public class PlanificationEntretiensTest {
     public void should_not_planifier_entretien_when_ConsultantRecruteur_is_busy()
      {
          List<Compétence> compétencesCandidat = new ArrayList<>();
-         compétencesCandidat.add(Compétence.DOTNET);
+         compétencesCandidat.add(Compétence.AGILITE);
 
          //Creation du candidat
-         Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+         Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
          //Creation du creneau horaire souhaité
          Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
-         CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(10).build();
+         CreneauHoraire creneauHoraire = CreneauHoraire.builder().date(dateSouhaite).heureDebut(13).build();
 
          //On execute la logique métier
          planificationEntretiens.planifierEntretien(candidat,creneauHoraire);
@@ -131,7 +131,7 @@ public class PlanificationEntretiensTest {
         compétencesCandidat.add(Compétence.JAVA);
 
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
@@ -150,7 +150,7 @@ public class PlanificationEntretiensTest {
         compétencesCandidat.add(Compétence.JAVA);
 
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
@@ -210,7 +210,7 @@ public class PlanificationEntretiensTest {
         List<Compétence> compétencesCandidat = new ArrayList<>();
 
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétencesCandidat).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(compétencesCandidat).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);
@@ -226,7 +226,7 @@ public class PlanificationEntretiensTest {
     @Test(expected=NoSkillsSelectedException.class)
     public void should_not_create_entretien_when_candidat_skills_are_null(){
         //Creation du candidat
-        Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(null).build();
+        Candidat candidat = Candidat.builder().Nom("Test").Competences(null).build();
 
         //Creation du creneau horaire souhaité
         Calendar dateSouhaite = new GregorianCalendar(2019,3,5);

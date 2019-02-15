@@ -2,14 +2,13 @@ package fr.esgi.models;
 
 import fr.esgi.exceptions.UnValidatedConstructorValueException;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 @Builder
 public class Candidat implements ValueObject{
-    private int Id;
     private String Nom;
     private List<Compétence> Competences;
 

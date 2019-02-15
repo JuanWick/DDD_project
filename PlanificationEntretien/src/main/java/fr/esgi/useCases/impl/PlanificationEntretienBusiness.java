@@ -1,7 +1,9 @@
 package fr.esgi.useCases.impl;
 
+import fr.esgi.exceptions.BusyConsultantRecruteurException;
 import fr.esgi.exceptions.ErrorApiException;
 import fr.esgi.exceptions.IncompleteInputParameterException;
+import fr.esgi.exceptions.UnMatchingCompetenceConsultantRecruteurException;
 import fr.esgi.infraStructure.outsideApi.ApiClient;
 import fr.esgi.infraStructure.outsideApi.PersistanceService;
 import fr.esgi.models.*;
@@ -92,20 +94,20 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
                 }
             }
         }
-        return false;
+        throw new UnMatchingCompetenceConsultantRecruteurException();
     }
 
     private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){
     for(Entretien EntretienConsultantExpected : persistanceService.getEntretiens(consultantRecruteur)){
         if(EntretienConsultantExpected.getCreneauHoraire().getHeureDebut() == creneauSouhaité.getHeureDebut()){
-            return false;
+            throw new BusyConsultantRecruteurException();
         }
     }
-       for(int DisponibilityConsultant : consultantRecruteur.getHoursFree()){
-           if(DisponibilityConsultant == creneauSouhaité.getHeureDebut()){
-               return true;
-           }
+   for(int DisponibilityConsultant : consultantRecruteur.getHoursFree()){
+       if(DisponibilityConsultant == creneauSouhaité.getHeureDebut()){
+           return true;
        }
-       return false;
+   }
+    throw new BusyConsultantRecruteurException();
     }
 }
