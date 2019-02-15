@@ -2,12 +2,11 @@ package fr.esgi.models;
 
 import fr.esgi.exceptions.UnValidatedConstructorValueException;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-import java.lang.reflect.Array;
 import java.util.List;
 
-@Data
+@Getter
 @Builder
 public class ConsultantRecruteur implements ValueObject{
 
