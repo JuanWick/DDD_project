@@ -7,17 +7,29 @@ import fr.esgi.useCases.PlanificationEntretiens;
 import fr.esgi.useCases.impl.PlanificationEntretienBusiness;
 import junit.framework.TestCase;
 import org.junit.Assert;
-import org.mockito.Mockito;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.*;
 
 import java.util.*;
 
-public class PlanificationEntretiensTest extends TestCase {
-    ApiClient apiClient = Mockito.mock(ApiclientImpl.class);
+public class PlanificationEntretiensTest {
+    @Mock
+    ApiClient apiClient;
+
+    @Spy
     PersistanceService persistanceService = new PersistanceServiceTestImpl();
 
+    @InjectMocks
     PlanificationEntretiens planificationEntretiens = new PlanificationEntretienBusiness(apiClient,persistanceService);
 
-    public void test_should_planifier_entretien()
+    @Before
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+    }
+
+    @Test
+    public void should_planifier_entretien()
     {
         //Creation du consultant recruteur cible
         List<Compétence> compétences = new ArrayList<>();
@@ -32,7 +44,7 @@ public class PlanificationEntretiensTest extends TestCase {
         MoisCreneau moisCreneauRecherche = MoisCreneau.builder()
                 .mois(3)
                 .annee(2019).build();
-        Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(moisCreneauRecherche)).thenReturn(consultantRecruteurs);
+        Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(Mockito.any(MoisCreneau.class))).thenReturn(consultantRecruteurs);
 
         //Creation du candidat
         Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétences).build();

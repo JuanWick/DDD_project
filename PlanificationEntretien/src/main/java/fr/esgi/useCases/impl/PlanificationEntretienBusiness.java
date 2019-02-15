@@ -6,6 +6,7 @@ import fr.esgi.infraStructure.outsideApi.ApiClient;
 import fr.esgi.infraStructure.outsideApi.PersistanceService;
 import fr.esgi.models.*;
 import fr.esgi.useCases.PlanificationEntretiens;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -26,12 +27,14 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
 
     @Override
     public void planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite) {
+        System.out.println("BB");
         if(null == candidat || null == creneauSouhaite) {
             throw new IncompleteInputParameterException();
         }
         List<ConsultantRecruteur> consultantRecruteurs;
         try {
             consultantRecruteurs = apiClient.chercherConsultantRecruteurDisponibleParMois(creneauHoraireToMoisCreneauAdapter(creneauSouhaite));
+            System.out.println("LISTE consultant : "+consultantRecruteurs.size());
         } catch(Exception e){
             throw new ErrorApiException();
         }
@@ -84,10 +87,10 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
     }
 
     private boolean peutTester(ConsultantRecruteur consultantRecruteur, Candidat candidat){//TODO
-        return false;
+        return true;
     }
 
     private boolean estDisponible(ConsultantRecruteur consultantRecruteur, CreneauHoraire creneauSouhaité){//TODO
-        return false;
+        return true;
     }
 }

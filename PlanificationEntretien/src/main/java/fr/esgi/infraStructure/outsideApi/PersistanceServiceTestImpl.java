@@ -17,10 +17,15 @@ public class PersistanceServiceTestImpl implements PersistanceService {
 
     @Override
     public Entretien getEntretien(Candidat candidat) {
+        System.out.printf("TEST : "+entretiens.size());
         for (Entretien entretien: entretiens){
             if(entretien.getCandidat().hashCode(candidat)){
+                System.out.printf("TEST : A");
+
                 return entretien;
             }
+            System.out.printf("TEST : B");
+
         }
         return null;
     }
