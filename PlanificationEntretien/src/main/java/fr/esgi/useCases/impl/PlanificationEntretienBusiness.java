@@ -27,14 +27,12 @@ public class PlanificationEntretienBusiness implements PlanificationEntretiens {
 
     @Override
     public void planifierEntretien(Candidat candidat, CreneauHoraire creneauSouhaite) {
-        System.out.println("BB");
         if(null == candidat || null == creneauSouhaite) {
             throw new IncompleteInputParameterException();
         }
         List<ConsultantRecruteur> consultantRecruteurs;
         try {
             consultantRecruteurs = apiClient.chercherConsultantRecruteurDisponibleParMois(creneauHoraireToMoisCreneauAdapter(creneauSouhaite));
-            System.out.println("LISTE consultant : "+consultantRecruteurs.size());
         } catch(Exception e){
             throw new ErrorApiException();
         }

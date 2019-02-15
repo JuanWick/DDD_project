@@ -44,7 +44,7 @@ public class PlanificationEntretiensTest {
         MoisCreneau moisCreneauRecherche = MoisCreneau.builder()
                 .mois(3)
                 .annee(2019).build();
-        Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(Mockito.any(MoisCreneau.class))).thenReturn(consultantRecruteurs);
+        Mockito.when(apiClient.chercherConsultantRecruteurDisponibleParMois(moisCreneauRecherche)).thenReturn(consultantRecruteurs);
 
         //Creation du candidat
         Candidat candidat = Candidat.builder().Id(1).Nom("Test").Competences(compétences).build();
